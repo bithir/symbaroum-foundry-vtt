@@ -61,9 +61,9 @@
   "gridUnits": "m",
   "primaryTokenAttribute": "health.toughness",
   "secondaryTokenAttribute": "combat.defense",
-  "url": "https://github.com/Perfectro/symbaroum-foundry-vtt",
+  "url": "https://github.com/bithir/symbaroum-foundry-vtt",
   "socket": true,
-  "manifest": "https://raw.githubusercontent.com/Perfectro/symbaroum-foundry-vtt/master/system.json",
-  "download": "https://github.com/Perfectro/symbaroum-foundry-vtt/archive/v2.8.zip",
+  "manifest": "https://raw.githubusercontent.com/bithir/symbaroum-foundry-vtt/master/system.json",
+  "download": "https://github.com/bithir/symbaroum-foundry-vtt/archive/master.zip",
   "license": "LICENSE.txt"
 }
