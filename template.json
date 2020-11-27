@@ -49,8 +49,10 @@
             "threshold": 0
           },
           "corruption": {
+			"value":0,
+			"max":0,
             "permanent": 0,
-            "temporary": 0,
+            "daily": 0,
             "threshold": 0
           }
         }
@@ -83,7 +85,10 @@
         "stigmas": ""
       },
       "experience": {
-        "current": 0,
+        "value": 0,
+        "unspent": 0,
+        "spent": 0,
+        "used":0,
         "total": 0
       },
       "notes": ""
@@ -142,8 +147,13 @@
             "threshold": 0
           },
           "corruption": {
+			"max" : 0,
             "threshold": 0
-          }
+          },
+          "experience": {
+			  "spent" : 0,
+			  "cost"  : 0
+		  }
         }
       }
     },

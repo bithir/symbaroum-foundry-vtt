@@ -14,6 +14,16 @@
             <option value="vigilant">{{localize "ATTRIBUTE.VIGILANT"}}</option>
         </select>
     </div>
+    {{#if isArmorWeaponRoll}}
+    <div class="advantage">
+      <label>{{localize "DIALOG.ADVANTAGE"}}</label> <input type="checkbox" id="advantage" value="1" data-dtype="Number"> 
+    </div>
+    {{/if}}		
+    
+    <div class="favour">
+        <label class="lblfavour">{{radioBoxes groupName choices checked=chosen localize=true}}</label>
+    </div>
+        
     <div class="bonus">
         <label>{{localize "DIALOG.MODIFIER"}}</label>
         <input id="bonus" type="number" value="0" data-dtype="Number"/>

@@ -85,6 +85,7 @@
     justify-content: center;
 }
 
+
 .symbaroum.sheet.actor .player .gear .wrapper-left .armors .item-list .protection,
 .symbaroum.sheet.actor .player .gear .wrapper-left .weapons .item-list .damage,
 .symbaroum.sheet.actor .player .gear .wrapper-left .artifacts .item-list .action {
@@ -142,13 +143,22 @@
     margin-left: 5px;
 }
 
+.symbaroum.sheet.actor .player .gear .wrapper-left .weapons .item-list .weapon .damage
+{
+    background: url(../../../asset/image/not-editable.jpg) repeat;
+    border: 1px solid var(--color-border);
+    box-shadow: inset 0 0 6px black;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+}
+
 .symbaroum.sheet.actor .player .gear .wrapper-left .armors .item-list .armor .protection,
 .symbaroum.sheet.actor .player .gear .wrapper-left .armors .item-list .armor .quality,
-.symbaroum.sheet.actor .player .gear .wrapper-left .weapons .item-list .weapon .damage,
 .symbaroum.sheet.actor .player .gear .wrapper-left .weapons .item-list .weapon .quality,
 .symbaroum.sheet.actor .player .gear .wrapper-left .artifacts .item-list .artifact .action,
 .symbaroum.sheet.actor .player .gear .wrapper-left .artifacts .item-list .artifact .corruption {
-    background: url(../../../asset/image/editable.jpg) repeat;
+    background: url(../../../asset/image/not-editable.jpg) repeat;
     border: 1px solid var(--color-border);
     box-shadow: inset 0 0 6px black;
     height: 28px;

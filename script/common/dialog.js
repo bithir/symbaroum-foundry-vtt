@@ -1,7 +1,11 @@
 import { rollAttribute } from "./roll.js";
 
 export async function prepareRollAttribute(attribute, armor, weapon) {
-    const html = await renderTemplate("systems/symbaroum/template/chat/dialog.html", {});
+    const html = await renderTemplate("systems/symbaroum/template/chat/dialog.html", { "isArmorWeaponRoll": (armor != null | weapon != null),
+		"choices": { "0":"Normal", "-1":"Disfavour", "1":"Favour"},
+		"chosen":"0",
+		"groupName":"favour"
+		});
     let dialog = new Dialog({
         title: attribute.name,
         content: html,
@@ -9,11 +13,26 @@ export async function prepareRollAttribute(attribute, armor, weapon) {
             roll: {
                 icon: '<i class="fas fa-check"></i>',
                 label: game.i18n.localize("BUTTON.ROLL"),
-                callback: async (html) => {
+                callback: async (html) => {					
                     const modifierName = html.find("#modifier")[0].value;
-                    const bonus = html.find("#bonus")[0].value;
+                    const bonus = html.find("#bonus")[0].value;                   
+                    
+                    let hasAdvantage = html.find("#advantage").length > 0;
+                    if( hasAdvantage ) {
+						hasAdvantage = html.find("#advantage")[0].checked;
+					}
+                    const advantage = hasAdvantage;
+                    
+                    let favours = html.find("input[name='favour']");
+                    let fvalue = 0;
+                    for ( let f of favours) {
+						console.log("favour["+f.checked+"]");
+						if( f.checked ) fvalue = f.value;
+					}					
+                    const favour = fvalue;
+                    
                     const modifier = getTargetAttribute(modifierName, bonus);
-                    await rollAttribute(attribute, modifier, armor, weapon);
+                    await rollAttribute(attribute, favour, modifier, armor, weapon, advantage);
                 },
             },
             cancel: {

@@ -1,10 +1,27 @@
-export async function rollAttribute(attribute, modifier, armor, weapon) {
-    let attributeRoll = new Roll("1d20", {});
+export async function rollAttribute(attribute, favourmod, modifier, armor, weapon, advantage) {
+	let d20str = "1d20";
+	if(favourmod == 1) d20str="2d20kl";
+	else if(favourmod == -1) d20str="2d20kh";
+    let attributeRoll = new Roll(d20str, {});
+    
     attributeRoll.roll();
-    if (game.dice3d != null) {
-        await game.dice3d.showForRoll(attributeRoll);
-    }
+    
+    console.log("Advantage["+advantage+"]");
+    
+    let advantagemod = 0;
+    let hasWeapon = weapon != null;
     let hasArmor = armor != null;
+    
+    if(hasWeapon && advantage ) { advantagemod+=2 }
+    else if (hasArmor && advantage) { advantagemod-=2; }
+    		
+    let mod = (modifier.value - 10) * -1;
+    let diceTarget = attribute.value + mod + advantagemod;
+    
+    if (game.dice3d != null) {
+        await game.dice3d.showForRoll(attributeRoll);        
+    }
+
     if (hasArmor) {
         if (armor.protection !== "") {
             let armorRoll = new Roll(armor.protection, {});
@@ -17,10 +34,13 @@ export async function rollAttribute(attribute, modifier, armor, weapon) {
             armor.value = 0;
         }
     }
-    let hasWeapon = weapon != null;
     if (hasWeapon) {
         if (weapon.damage !== "") {
-            let weaponRoll = new Roll(weapon.damage, {});
+			let dam = weapon.damage;
+			if( advantage ) { 
+				dam += "+1d4";
+			}
+            let weaponRoll = new Roll(dam, {});
             weaponRoll.roll();
             if (game.dice3d != null) {
                 await game.dice3d.showForRoll(weaponRoll);
@@ -30,16 +50,21 @@ export async function rollAttribute(attribute, modifier, armor, weapon) {
             weapon.value = 0;
         }
     }
-    let mod = (modifier.value - 10) * -1;
-    let diceTarget = attribute.value + mod;
+    
+    console.log("attributeRoll.terms["+JSON.stringify(attributeRoll.terms)+"]");
+    console.log("attributeRoll.results["+JSON.stringify(attributeRoll.results)+"]");
+    
     let rollData = {
         name: `${attribute.name} (${diceTarget}) ⬅ ${modifier.name} (${mod})`,
         hasSucceed: attributeRoll._total <= diceTarget,
         diceResult: attributeRoll._total,
+        result: attributeRoll.result,
         hasArmor: hasArmor,
         hasWeapon: hasWeapon,
+        isAdvantage: advantagemod !== 0,
+        isFavour: favourmod != 0,
         armor: armor,
-        weapon: weapon
+        weapon: weapon        
     };
     const html = await renderTemplate("systems/symbaroum/template/chat/roll.html", rollData);
     let chatData = {

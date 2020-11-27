@@ -1,6 +1,6 @@
 {
   "ABILITY.NAME": "Name",
-  "ABILITY.ACTIVE": "Is Active",
+  "ABILITY.ACTIVE": "Learned",
   "ABILITY.ACTION": "Action",
   "ABILITY.DESCRIPTION": "Description",
 
@@ -76,7 +76,11 @@
 
   "DIALOG.ATTRIBUTE": "Attribute",
   "DIALOG.MODIFIER": "Modifier",
-
+  "DIALOG.ADVANTAGE": "Advantage",
+  "DIALOG.FAVOUR_NORMAL": "Normal",
+  "DIALOG.FAVOUR_FAVOUR": "Favour", 
+  "DIALOG.FAVOUR_DISFAVOUR": "Disfavour",
+  
   "EQUIPMENT.NAME": "Name",
   "EQUIPMENT.COST": "Cost",
   "EQUIPMENT.DESCRIPTION": "Description",
@@ -88,16 +92,18 @@
   "GEAR.OTHER": "Other",
   "GEAR.STATE": "State",
 
-  "HEALTH.TOUGHNESS": "Toughness",
+  "HEALTH.TOUGHNESS": "TOUGHNESS",
   "HEALTH.TOUGHNESS_MAX": "Tgh. Max",
-  "HEALTH.TOUGHNESS_CURRENT": "Current",
+  "HEALTH.TOUGHNESS_VALUE": "Current",
   "HEALTH.TOUGHNESS_TOTAL": "Total",
   "HEALTH.TOUGHNESS_THRESHOLD": "Threshold",
   "HEALTH.TOUGHNESS_THRESHOLD_MAX": "Tgh. Threshold",
-  "HEALTH.CORRUPTION": "Corruption",
+  "HEALTH.CORRUPTION": "CORRUPTION",
+  "HEALTH.CORRUPTION_VALUE": "Current",
   "HEALTH.CORRUPTION_TEMPORARY": "Temporary",
+  "HEALTH.CORRUPTION_DAILY": "Daily",
   "HEALTH.CORRUPTION_PERMANENT": "Permanent",
-  "HEALTH.CORRUPTION_THRESHOLD": "Threshold",
+  "HEALTH.CORRUPTION_MAX": "Abom. Thresh.",
   "HEALTH.CORRUPTION_THRESHOLD_MAX": "Cor. Threshold",
 
   "ITEM.TRAIT": "Trait",
