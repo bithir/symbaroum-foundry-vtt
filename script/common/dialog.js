@@ -21,12 +21,11 @@ export async function prepareRollAttribute(attribute, armor, weapon) {
                     if( hasAdvantage ) {
 						hasAdvantage = html.find("#advantage")[0].checked;
 					}
-                    const advantage = hasAdvantage;
+                    const advantage = hasAdvantage;                    
                     
                     let favours = html.find("input[name='favour']");
                     let fvalue = 0;
-                    for ( let f of favours) {
-						console.log("favour["+f.checked+"]");
+                    for ( let f of favours) {						
 						if( f.checked ) fvalue = f.value;
 					}					
                     const favour = fvalue;

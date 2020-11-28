@@ -12,20 +12,28 @@
         {{/if}}
                
         {{#if hasSucceed}}
+        {{#if isCriticalSuccess}}
+        <h4>{{localize "CHAT.CRITICAL_SUCCESS"}} ({{diceResult}})</h4>
+        {{else}}
         <h4>{{localize "CHAT.SUCCEED"}} ({{diceResult}})</h4>
+        {{/if}}
         {{#if isFavour}}
-        <p style="font-size: 0.7em;text-align:center">{{result}}</p>
+        <p style="font-size: 0.7em;text-align:center">{{{result}}}</p>
         {{/if}}        
         
         {{#if hasWeapon}}
-        <p style="margin-top: 5px"><strong>{{localize "WEAPON.DAMAGE"}}:</strong> {{weapon.value}}</p>
+        <p style="margin-top: 5px"><strong>{{weapon.name}} {{localize "WEAPON.DAMAGE"}}:</strong> {{weapon.value}}</p>
         <p><strong>{{localize "WEAPON.QUALITY"}}:</strong> {{weapon.quality}}</p>
         {{/if}}
 
         {{else}}
-        <h4>{{localize "CHAT.FAILED"}} ({{diceResult}})</h4>
+        {{#if isCriticalFailure}}
+        <h4>{{localize "CHAT.CRITICAL_FAILURE"}} ({{diceResult}})</h4>
+        {{else}}
+        <h4>{{localize "CHAT.FAILED"}} ({{diceResult}})</h4>        
+        {{/if}}
         {{#if isFavour}}
-        <p style="font-size: 0.7em;text-align:center">{{result}}</p>
+        <p style="font-size: 0.7em;text-align:center">{{{result}}}</p>
         {{/if}}
         
         {{#if hasArmor}}

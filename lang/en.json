@@ -68,6 +68,7 @@
   "CHAT.SUCCEED": "Succeed",
   "CHAT.FAILED": "Failed",
   "CHAT.CRITICAL_SUCCESS": "Critical Success",
+  "CHAT.CRITICAL_FAILURE": "Fumble",
   "CHAT.RECOVER": "Recover",
   "CHAT.TOUGHNESS": "toughness",
   "CHAT.STAY_ALIVE": "You may stay alive for now !",
