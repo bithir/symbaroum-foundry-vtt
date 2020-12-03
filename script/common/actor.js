@@ -13,11 +13,12 @@ export class SymbaroumActor extends Actor {
             data: {
                 protection: "0",
                 quality: "",
+                defenseattribute: "quick",
                 impeding: 0
             }
         };
         data.data.bonus = {
-            defense: 0,
+			defense: 0,
             accurate: 0,
             cunning: 0,
             discreet: 0,
@@ -57,12 +58,14 @@ export class SymbaroumActor extends Actor {
     _computeSecondaryAttributes(data) {
 		
 		// Health - toughness
-        data.data.health.toughness.max = (data.data.attributes.strong.value > 10 ? data.data.attributes.strong.value : 10) + data.data.bonus.toughness.max;
-        data.data.health.toughness.threshold = Math.ceil(data.data.attributes.strong.value / 2) + data.data.bonus.toughness.threshold;
+		let strong = data.data.attributes.strong.value + data.data.bonus.strong;
+        data.data.health.toughness.max = Math.max(strong,10) + data.data.bonus.toughness.max;
+        data.data.health.toughness.threshold = Math.ceil( strong / 2) + data.data.bonus.toughness.threshold;
         
         // Health - corruption
-        data.data.health.corruption.threshold = Math.ceil(data.data.attributes.resolute.value / 2) + data.data.bonus.corruption.threshold;
-        data.data.health.corruption.max = data.data.attributes.resolute.value + data.data.bonus.corruption.max;
+        let resolute = data.data.attributes.resolute.value + data.data.bonus.resolute;
+        data.data.health.corruption.threshold = Math.ceil( resolute / 2) + data.data.bonus.corruption.threshold;
+        data.data.health.corruption.max = resolute + data.data.bonus.corruption.max;
         data.data.health.corruption.value = data.data.health.corruption.temporary + data.data.health.corruption.daily + data.data.health.corruption.permanent;
         
         // Exp spent on items
@@ -70,15 +73,22 @@ export class SymbaroumActor extends Actor {
         data.data.experience.spent = data.data.bonus.experience.cost + data.data.bonus.experience.spent;        
         // Exp unspent is current exp - spent - used
         data.data.experience.unspent = data.data.experience.value - data.data.experience.spent - data.data.experience.used;
+
         
+        console.log("before getting activeArmor");
         const activeArmor = this._getActiveArmor(data);
+        
         data.data.combat = {
             id: activeArmor._id,
             armor: activeArmor.name,
             protection: activeArmor.data.protection,
             quality: activeArmor.data.quality,
-            defense: data.data.attributes.quick.value - activeArmor.data.impeding + data.data.bonus.defense
+            //initiative: data.data.attributes[activeArmor.data..initative.primaryattribute].value + data.data.bonus[activeArmor.data..initative.primaryattribute].value +
+			// (data.data.attributes[activeArmor.data..initative.secondaryattribute].value + data.data.bonus[activeArmor.data..initative.secondaryattribute].value)/100,
+            defense: data.data.attributes[activeArmor.data.defenseattribute].value + data.data.bonus[activeArmor.data.defenseattribute] - activeArmor.data.impeding + data.data.bonus.defense
+            // defense: 0
         };
+        console.log("data.data.combat.defense="+data.data.combat.defense);
     }
 
     _computePower(data, item) {
@@ -89,10 +99,10 @@ export class SymbaroumActor extends Actor {
             experience = 10;
         } else if (item.isBurden) {
             item.data.actions = "Burden"
-            experience = 5 * -1; // TODO - level
+            experience = -5 * 1; // item.data.level; 
         } else if (item.isBoon) {
             item.data.actions = "Boon"
-            experience = 5 * 1; // TODO - level
+            experience = 5 * 1; // item.data.level;
         } else {
             let novice = "-";
             let adept = "-";
@@ -138,6 +148,7 @@ export class SymbaroumActor extends Actor {
             data: {
                 protection: "0",
                 quality: "",
+                defenseattribute: "quick",
                 impeding: 0
             }
         };

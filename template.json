@@ -40,7 +40,7 @@
             "value": 10
           }
         }
-      },
+      },     
       "health": {
         "health": {
           "toughness": {
@@ -133,7 +133,7 @@
     "templates": {
       "bonus": {
         "bonus": {
-          "defense": 0,
+		  "defense": 0,
           "accurate": 0,
           "cunning": 0,
           "discreet": 0,
@@ -232,13 +232,15 @@
       "templates": [
         "bonus"
       ],
-      "description": ""
+      "description": "",
+      "level": 1
     },
     "boon": {
       "templates": [
         "bonus"
       ],
-      "description": ""
+      "description": "",
+      "level": 1
     },
     "weapon": {
       "templates": [
@@ -260,6 +262,11 @@
       "impeding": 0,
       "quality": "",
       "cost": "",
+      "defenseattribute": "quick",
+      "initative": {
+		  "primaryattribute": "quick",
+		  "secondaryattribute": "vigilant"
+	  },
       "state": "other"
     },
     "equipment": {

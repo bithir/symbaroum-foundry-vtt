@@ -25,9 +25,25 @@
                     {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
                 </div>
             </div>
+            
             <div class="tab" data-group="primary" data-tab="stats">
                 <div class="stats foreground border">
                     <h1>{{localize "TITLE.STATS"}}</h1>
+                    <div class="attribute">
+                        <label>{{localize "ARMOR.ATTRIBUTE"}}</label>
+                        <select name="data.defenseattribute">
+                            {{#select data.defenseattribute}}
+                            <option value="accurate">{{localize "ATTRIBUTE.ACCURATE"}}</option>
+                            <option value="cunning">{{localize "ATTRIBUTE.CUNNING"}}</option>
+                            <option value="discreet">{{localize "ATTRIBUTE.DISCREET"}}</option>
+                            <option value="persuasive">{{localize "ATTRIBUTE.PERSUASIVE"}}</option>
+                            <option value="quick">{{localize "ATTRIBUTE.QUICK"}}</option>
+                            <option value="resolute">{{localize "ATTRIBUTE.RESOLUTE"}}</option>
+                            <option value="strong">{{localize "ATTRIBUTE.STRONG"}}</option>
+                            <option value="vigilant">{{localize "ATTRIBUTE.VIGILANT"}}</option>
+                            {{/select}}
+                        </select>
+                    </div>
                     <div class="protection">
                         <label>{{localize "ARMOR.PROTECTION"}}</label>
                         <input name="data.protection" type="text" value="{{data.protection}}"/>

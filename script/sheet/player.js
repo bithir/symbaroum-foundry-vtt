@@ -2,6 +2,10 @@ import { SymbaroumActorSheet } from "./actor.js";
 import { prepareRollAttribute } from "../common/dialog.js";
 import { deathRoll } from "../common/roll.js";
 
+Handlebars.registerHelper('printDiceResults', function (apa) {
+    return apa;
+});
+
 export class PlayerSheet extends SymbaroumActorSheet {
 
     static get defaultOptions() {

@@ -17,12 +17,13 @@
         {{else}}
         <h4>{{localize "CHAT.SUCCEED"}} ({{diceResult}})</h4>
         {{/if}}
-        {{#if isFavour}}
+        {{#if isMultiDice}}
         <p style="font-size: 0.7em;text-align:center">{{{result}}}</p>
         {{/if}}        
         
         {{#if hasWeapon}}
         <p style="margin-top: 5px"><strong>{{weapon.name}} {{localize "WEAPON.DAMAGE"}}:</strong> {{weapon.value}}</p>
+        <p style="font-size: 0.7em;text-align:center">{{{weapon.detailedCombatRoll}}}</p>
         <p><strong>{{localize "WEAPON.QUALITY"}}:</strong> {{weapon.quality}}</p>
         {{/if}}
 
@@ -32,7 +33,7 @@
         {{else}}
         <h4>{{localize "CHAT.FAILED"}} ({{diceResult}})</h4>        
         {{/if}}
-        {{#if isFavour}}
+        {{#if isMultiDice}}
         <p style="font-size: 0.7em;text-align:center">{{{result}}}</p>
         {{/if}}
         

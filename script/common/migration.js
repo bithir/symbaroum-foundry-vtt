@@ -81,6 +81,17 @@ const migrateItemData = (item, worldSchemaVersion) => {
             update["data.bonus.toughness"] = { max:0, threshold: 0 };
             update["data.bonus.corruption"] = { threshold: 0 };
         }
+        const boonType = [ "boon", "burden" ];
+        
+        if( boonType.includes(item.type) ) {
+			update["level"] = 1;
+		}
+        if( item.type == "armor" ) {
+		    update["data.defenseattribute"] = "quick";
+			update["data.initative"] = {
+				"primaryattribute": "quick",
+				"secondaryattribute": "vigilant" };
+		}
     }
     if (!isObjectEmpty(update)) {
         update._id = item._id;

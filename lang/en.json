@@ -14,6 +14,7 @@
 
   "ARMOR.NAME": "Name",
   "ARMOR.PROTECTION": "Protection",
+  "ARMOR.ATTRIBUTE" : "Attribute",
   "ARMOR.PROTECTION_SHORT": "Prot.",
   "ARMOR.IMPENDING": "Impending",
   "ARMOR.DEFENSE": "Defense",

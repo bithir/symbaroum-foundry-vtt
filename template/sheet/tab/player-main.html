@@ -3,7 +3,7 @@
 		
 	<div class="section1">
 		
-    <div class="attributes foreground border">
+    <div class="attributes foreground">
         <h1>{{localize "TITLE.ATTRIBUTES"}}</h1>
         {{#each data.attributes as |attribute key|}}
             <div class="attribute">
@@ -18,7 +18,7 @@
     <div class="health">
         <!-- <h1 style="width>{{localize "TITLE.HEALTH"}}</h1> -->
         <div class="toughness ">
-        <div class="health-toughnesscol foreground border">
+        <div class="health-toughnesscol foreground">
         <h1>{{localize "HEALTH.TOUGHNESS"}}</h1>
         <div class="toughness-value">
             <label>{{localize "HEALTH.TOUGHNESS_VALUE"}}</label>
@@ -35,7 +35,7 @@
          </div>
         </div>
         
-        <div class="corruption foreground border">
+        <div class="corruption foreground">
         <h1>{{localize "HEALTH.CORRUPTION"}}</h1>
         <div class="health-corruptioncol">
 			
@@ -71,7 +71,7 @@
         </div>        
     </div>
 
-    <div class="combat foreground border">
+    <div class="combat foreground">
         <h1>{{localize "TITLE.COMBAT"}}</h1>
         <div class="armor">
             <button class="roll-armor">{{data.combat.armor}}</button>

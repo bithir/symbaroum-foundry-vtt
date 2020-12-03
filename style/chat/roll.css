@@ -30,6 +30,10 @@
     text-align: center;
 }
 
+.symbaroum.chat.roll .strike {
+	text-decoration: line-through;
+}
+
 .symbaroum.chat.roll h4 {
     font-family: var(--font-text);
     font-size: 16px;

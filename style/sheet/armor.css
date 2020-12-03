@@ -16,10 +16,14 @@
     border-top: none;
 }
 
+.symbaroum.sheet.item .armor .tab .stats .attribute {
+    margin-top: 10px;
+}
+
 .symbaroum.sheet.item .armor .description .editor {
     height: 134px;
 }
-
+.symbaroum.sheet.item .armor .tab .attribute,
 .symbaroum.sheet.item .armor .tab .protection,
 .symbaroum.sheet.item .armor .tab .impeding,
 .symbaroum.sheet.item .armor .tab .quality,
