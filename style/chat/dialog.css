@@ -37,6 +37,7 @@
 }
 
 
+.symbaroum.dialog input[type="text"],
 .symbaroum.dialog input[type="number"],
 .symbaroum.dialog select {
     background: url(../../asset/image/editable.jpg) repeat;
@@ -60,6 +61,7 @@
     margin: 0;
 }
 
+.symbaroum.dialog .damagemodifier,
 .symbaroum.dialog .advantage,
 .symbaroum.dialog .favour,
 .symbaroum.dialog .attribute,

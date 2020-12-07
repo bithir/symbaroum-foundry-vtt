@@ -29,9 +29,14 @@
     margin: 0 0 8px;
     text-align: center;
 }
+.symbaroum.chat.roll .critical {
+    font-weight: bold;
+	color: darkblue;
+}
 
 .symbaroum.chat.roll .strike {
 	text-decoration: line-through;
+	color: red;
 }
 
 .symbaroum.chat.roll h4 {

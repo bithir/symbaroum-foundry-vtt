@@ -14,7 +14,11 @@ export class SymbaroumActor extends Actor {
                 protection: "0",
                 quality: "",
                 defenseattribute: "quick",
-                impeding: 0
+			    initative: {
+				  "primaryattribute": "quick",
+				  "secondaryattribute": "vigilant"
+				},
+				impeding: 0
             }
         };
         data.data.bonus = {
@@ -75,7 +79,7 @@ export class SymbaroumActor extends Actor {
         data.data.experience.unspent = data.data.experience.value - data.data.experience.spent - data.data.experience.used;
 
         
-        console.log("before getting activeArmor");
+        // console.log("before getting activeArmor");
         const activeArmor = this._getActiveArmor(data);
         
         data.data.combat = {
@@ -83,12 +87,10 @@ export class SymbaroumActor extends Actor {
             armor: activeArmor.name,
             protection: activeArmor.data.protection,
             quality: activeArmor.data.quality,
-            //initiative: data.data.attributes[activeArmor.data..initative.primaryattribute].value + data.data.bonus[activeArmor.data..initative.primaryattribute].value +
-			// (data.data.attributes[activeArmor.data..initative.secondaryattribute].value + data.data.bonus[activeArmor.data..initative.secondaryattribute].value)/100,
+            initiative: data.data.attributes[activeArmor.data.initative.primaryattribute].value + data.data.bonus[activeArmor.data.initative.primaryattribute] +
+			  (data.data.attributes[activeArmor.data.initative.secondaryattribute].value + data.data.bonus[activeArmor.data.initative.secondaryattribute])/100,
             defense: data.data.attributes[activeArmor.data.defenseattribute].value + data.data.bonus[activeArmor.data.defenseattribute] - activeArmor.data.impeding + data.data.bonus.defense
-            // defense: 0
         };
-        console.log("data.data.combat.defense="+data.data.combat.defense);
     }
 
     _computePower(data, item) {
@@ -149,6 +151,10 @@ export class SymbaroumActor extends Actor {
                 protection: "0",
                 quality: "",
                 defenseattribute: "quick",
+			    initative: {
+				  primaryattribute: "quick",
+				  secondaryattribute: "vigilant"
+				},
                 impeding: 0
             }
         };

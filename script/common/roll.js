@@ -1,4 +1,4 @@
-export async function rollAttribute(attribute, favourmod, modifier, armor, weapon, advantage) {
+export async function rollAttribute(character, attribute, favourmod, modifier, armor, weapon, advantage, damModifier) {
 	let d20str = "1d20";
 	let detailedRoll = "";
 	let dam = "";
@@ -15,7 +15,7 @@ export async function rollAttribute(attribute, favourmod, modifier, armor, weapo
     
     for( let dd of attributeRoll.terms[0]["results"] ) {
 		if( j > 0 ) {
-			detailedRoll += ", ";
+			detailedRoll += " | ";
 		} if(dd["active"] ) {
 			detailedRoll += dd["result"];
 		} else {
@@ -40,16 +40,14 @@ export async function rollAttribute(attribute, favourmod, modifier, armor, weapo
 		mod++;
 	}
     
-    let diceTarget = attribute.value + mod + advantagemod;
-    
-    console.log("diceTarget["+diceTarget+"]");
+    let diceTarget = Math.min(Math.max(1,attribute.value + mod + advantagemod), 19);
     
     if( attributeRoll._total === 1 || attributeRoll._total === 20) {
 		let critRoll = new Roll("1d20", {});
 		critRoll.roll();
 		isCriticalSuccess = critRoll.total <= diceTarget && attributeRoll.total === 1;
 		isCriticalFailure = critRoll.total > diceTarget && attributeRoll.total === 20;
-		detailedRoll = detailedRoll + " crit/fumble roll:"+critRoll.total;
+		detailedRoll = detailedRoll + " &gt; <span class='critical'>"+critRoll.total+"</span>";
 		isMultiDice = true;
 	}
     
@@ -57,14 +55,14 @@ export async function rollAttribute(attribute, favourmod, modifier, armor, weapo
         await game.dice3d.showForRoll(attributeRoll);        
     }
 
-    if (hasArmor && attributeRoll.total <= diceTarget) {
+    if (hasArmor && attributeRoll.total >= diceTarget) {
         if (armor.protection !== "") {
             let armorRoll = new Roll(armor.protection, {});
             armorRoll.roll();
             if (game.dice3d != null) {
                 await game.dice3d.showForRoll(armorRoll);
             }
-            armor.detailedCombatRoll = formatDice(armorRoll.terms);
+            armor.detailedCombatRoll = formatDice(armorRoll.terms, "+");
             armor.value = armorRoll.total;
         } else {
             armor.value = 0;
@@ -79,20 +77,22 @@ export async function rollAttribute(attribute, favourmod, modifier, armor, weapo
 			if( isCriticalSuccess ) {
 				dam += "+1d6";
 			}
+			if( damModifier !== "") {
+				dam += "+"+damModifier;
+			}
             let weaponRoll = new Roll(dam, {});
-            weaponRoll.roll();
-            console.log("weaponRoll.results["+JSON.stringify(weaponRoll.terms)+"]");
+            weaponRoll.roll();            
             if (game.dice3d != null) {
                 await game.dice3d.showForRoll(weaponRoll);
             }
-            weapon.detailedCombatRoll = dam + " " + formatDice(weaponRoll.terms);
+            weapon.detailedCombatRoll = dam + " = " + formatDice(weaponRoll.terms, "+");
             weapon.value = weaponRoll._total;
         } else {
             weapon.value = 0;
         }
     }
     
-    // console.log("attributeRoll.terms["+JSON.stringify(attributeRoll.terms)+"]");   
+
     
     let rollData = {
         name: `${attribute.name} (${diceTarget}) ⬅ ${modifier.name} (${mod})`,
@@ -110,8 +110,12 @@ export async function rollAttribute(attribute, favourmod, modifier, armor, weapo
         weapon: weapon        
     };
     const html = await renderTemplate("systems/symbaroum/template/chat/roll.html", rollData);
+     
     let chatData = {
         user: game.user._id,
+        speaker: {
+			actor: character.id
+		},
         rollMode: game.settings.get("core", "rollMode"),
         content: html,
     };
@@ -123,19 +127,23 @@ export async function rollAttribute(attribute, favourmod, modifier, armor, weapo
     ChatMessage.create(chatData);
 }
 
-function formatDice(diceResult) {
+function formatDice(diceResult, separator) {
 	let rolls = "";
 	for( let dd of diceResult ) {
 		if (typeof dd === 'string' || Number.isInteger(dd) ) {
 			rolls += dd;
 		} else {
-			console.log("dd "+JSON.stringify(dd));
+			let j = 0;
 			for( let diceDetails of dd.results) {
+				if( j > 0 && separator != null) {
+					rolls += separator;
+				}
 				if(diceDetails.active ) {
 					rolls += diceDetails["result"];				
 				} else {
 					rolls += "<span class='strike'>"+diceDetails["result"]+"</span>";
 				}
+				j++;
 			}
 		}
 		
@@ -168,7 +176,8 @@ export async function deathRoll(sheet) {
     const html = await renderTemplate("systems/symbaroum/template/chat/death.html", rollData);
     
     let chatData = {
-        user: game.user._id,
+		user: game.user._id,
+        alias: character.name,
         rollMode: game.settings.get("core", "rollMode"),
         content: html,
     };
